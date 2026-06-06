@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uma surpresa para minha irmã</title>
+  <style>
+    :root {
+      --bg: #fff8ef;
+      --bg-soft: #f6ead8;
+      --card: rgba(255, 255, 255, 0.86);
+      --text: #483126;
+      --muted: #7a6054;
+      --accent: #b86b3e;
+      --accent-strong: #8f4721;
+      --line: rgba(143, 71, 33, 0.14);
+      --glow: rgba(241, 197, 112, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, var(--glow), transparent 30%),
+        linear-gradient(180deg, #fffdf8 0%, var(--bg) 45%, var(--bg-soft) 100%);
+      min-height: 100vh;
+    }
+
+    .hero {
+      padding: 72px 20px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.4);
+      filter: blur(6px);
+    }
+
+    .hero::before {
+      width: 260px;
+      height: 260px;
+      top: -90px;
+      left: -80px;
+    }
+
+    .hero::after {
+      width: 220px;
+      height: 220px;
+      right: -60px;
+      bottom: -80px;
+    }
+
+    .cross {
+      width: 22px;
+      height: 52px;
+      margin: 0 auto 24px;
+      position: relative;
+      opacity: 0.72;
+    }
+
+    .cross::before,
+    .cross::after {
+      content: "";
+      position: absolute;
+      background: var(--accent);
+      border-radius: 999px;
+    }
+
+    .cross::before {
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+    }
+
+    .cross::after {
+      width: 48px;
+      height: 10px;
+      left: 50%;
+      top: 16px;
+      transform: translateX(-50%);
+    }
+
+    h1,
+    h2 {
+      margin: 0;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 4.7rem);
+      line-height: 0.95;
+    }
+
+    .subtitle {
+      max-width: 760px;
+      margin: 22px auto 0;
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .verse {
+      margin: 26px auto 0;
+      max-width: 700px;
+      font-style: italic;
+      color: var(--accent-strong);
+      font-size: 1.05rem;
+    }
+
+    main {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto 48px;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      grid-column: span 12;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 18px 50px rgba(104, 72, 43, 0.08);
+      backdrop-filter: blur(10px);
+    }
+
+    .highlight {
+      grid-column: span 7;
+      padding: 34px;
+    }
+
+    .tribute-panel {
+      grid-column: span 5;
+      padding: 18px;
+      background:
+        linear-gradient(180deg, rgba(255, 251, 246, 0.94), rgba(246, 234, 216, 0.86));
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.72rem;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .message {
+      font-size: 1.08rem;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .message strong {
+      color: var(--text);
+    }
+
+    .virtues {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .virtue {
+      background: rgba(255, 248, 239, 0.92);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 18px;
+    }
+
+    .virtue span {
+      display: block;
+    }
+
+    .virtue .title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent-strong);
+    }
+
+    .virtue .text {
+      margin-top: 8px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .details,
+    .prayer {
+      grid-column: span 6;
+    }
+
+    .memory {
+      grid-column: span 12;
+      background:
+        linear-gradient(180deg, rgba(255, 251, 246, 0.92), rgba(246, 234, 216, 0.86));
+    }
+
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .memory-note {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.6);
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    ul {
+      margin: 18px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .closing {
+      grid-column: span 12;
+      padding: 38px 30px;
+      background:
+        linear-gradient(135deg, rgba(184, 107, 62, 0.95), rgba(143, 71, 33, 0.92));
+      color: #fffaf5;
+    }
+
+    .closing p {
+      margin: 14px auto 0;
+      max-width: 680px;
+      line-height: 1.7;
+      color: rgba(255, 250, 245, 0.9);
+    }
+
+    footer {
+      text-align: center;
+      padding: 0 20px 44px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 860px) {
+      .highlight,
+      .tribute-panel,
+      .details,
+      .prayer,
+      .memory {
+        grid-column: span 12;
+      }
+
+      .memory-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="cross"></div>
+    <div class="eyebrow">Para uma irmã especial</div>
+    <h1>Para quem serve<br>com amor</h1>
+    <p class="verse">
+      “Tudo o que fizerdes, fazei-o de coração, como para o Senhor.” — Colossenses 3:23
+    </p>
+  </section>
+
+  <main>
+    <section class="card highlight">
+      <div class="eyebrow">Com amor</div>
+      <h2>Para a irmã que serve com o coração</h2>
+      <p class="message">
+        Talvez os seus pensamentos estejam nos detalhes, naquilo que ainda falta e em tudo o que você deseja que dê certo.
+        Mas existe algo que já é certo antes mesmo de tudo acontecer:
+        <strong>Deus conhece a beleza do seu sim</strong>.
+      </p>
+      <p class="message">
+        Seu cuidado, sua fé e sua entrega já são, por si só, uma forma de tocar vidas.
+        Este encontro não nasceu apenas de uma ideia, mas de um coração generoso, disposto a servir com amor.
+      </p>
+      <p class="message">
+        E é isso que o torna tão especial.
+      </p>
+    </section>
+
+    <section class="card tribute-panel">
+      <div class="eyebrow">Três marcas do seu coração</div>
+      <h2>O que torna sua presença tão bonita</h2>
+      <div class="virtues">
+        <div class="virtue">
+          <span class="title">Fé que sustenta</span>
+          <span class="text">
+            Mesmo nos bastidores e no cansaço, você continua servindo com confiança em Deus.
+          </span>
+        </div>
+        <div class="virtue">
+          <span class="title">Doçura que acolhe</span>
+          <span class="text">
+            Seu jeito faz as pessoas se sentirem vistas, ouvidas e queridas.
+          </span>
+        </div>
+        <div class="virtue">
+          <span class="title">Coragem que inspira</span>
+          <span class="text">
+            Você aceita a missão com amor e transforma cuidado em testemunho.
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card details">
+      <div class="eyebrow">O que admiramos em você</div>
+      <h2>Pequenas coisas que dizem muito</h2>
+      <ul>
+        <li>Sua dedicação mesmo quando ninguém vê</li>
+        <li>Sua fé tranquila, forte e acolhedora</li>
+        <li>Sua fé serena que inspira e fortalece quem está por perto</li>
+        <li>Sua coragem de servir com amor e humildade</li>
+        <li>Sua vontade sincera de aproximar pessoas de Deus</li>
+      </ul>
+    </section>
+
+    <section class="card prayer">
+      <div class="eyebrow">Oração de Santa Teresinha</div>
+      <h2>Uma oração inspirada na chuva de rosas</h2>
+      <p class="message">
+        Senhor, por intercessão de Santa Teresinha do Menino Jesus,
+        ensina-nos a viver com confiança, amor e simplicidade.
+        Derrama sobre esta missão uma chuva de graças, paz e ternura,
+        para que cada jovem se sinta tocado pelo teu amor.
+        E que o coração de quem serve permaneça firme, leve e cheio de fé. Amém.
+      </p>
+    </section>
+
+    <section class="card memory">
+      <div class="eyebrow">Lembretes para guardar</div>
+      <h2>Se o cansaço chegar, volte a estas palavras</h2>
+      <div class="memory-grid">
+        <div class="memory-note">
+          Você não está apenas organizando um encontro. Você está preparando um espaço
+          onde Deus pode tocar alguém para sempre.
+        </div>
+        <div class="memory-note">
+          Mesmo os detalhes mais simples podem virar resposta de oração
+          na vida de quem chegar precisando de acolhimento.
+        </div>
+        <div class="memory-note">
+          Antes de ser sobre o evento, é sobre quem você é:
+          alguém que escolheu servir com ternura, fé e coragem.
+        </div>
+      </div>
+    </section>
+
+    <section class="card closing">
+      <div class="eyebrow" style="color: rgba(255, 247, 237, 0.75);">Com carinho</div>
+      <h2>Este site é só para te lembrar de uma coisa</h2>
+      <p>
+        Você é muito especial. Sua entrega tem valor, sua fé inspira
+        e o seu cuidado já é, por si só, uma forma de evangelizar.
+        Que você se sinta amada do mesmo jeito que faz tantos outros se sentirem acolhidos.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    Feito com carinho pelos irmãos Miguel e Didi.
+  </footer>
+
+</body>
+</html>
